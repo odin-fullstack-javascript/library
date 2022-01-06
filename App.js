@@ -15,6 +15,18 @@ function Book(title, author, pages, read) {
 
 // FUNCTIONS
 
+function renderFragment(htmlString, containerElement) {
+  const fragment = document.createDocumentFragment()
+  const parser = new DOMParser()
+  const newNode = parser.parseFromString(htmlString, "text/html")
+  
+  const elements = newNode.documentElement.querySelectorAll('div')
+  elements.forEach(element => {
+    fragment.appendChild(element)
+  })
+  containerElement.append(fragment)
+}
+
 const createBook = (bookTitle, bookAuthor, bookPages, bookRead) => {
   const newBook = Object.create(Book.prototype)
 
@@ -27,6 +39,7 @@ const createBook = (bookTitle, bookAuthor, bookPages, bookRead) => {
 }
 
 const removeBook = (id) => {
+  bookContainer.innerHTML = ''
   myLibrary.splice(id, 1)
 }
 
@@ -37,30 +50,33 @@ const createBookCards = () => {
         <h1 class="book-card--title">${book.title}</h1>
         <p class="book-card--author">${book.author}</p>
         <p class="book-car--pages">${book.pages}</p>
-        <button id="${id}" delete>delete</button>
+        <button id="${id}" delete onclick="removeBookEvent(event)">delete</button>
       </div>
     `
   ))
 }
 
+
 const renderCards = () => {
-  bookContainer.innerHTML = createBookCards().toString().replaceAll(',', '')
+  const cardString = createBookCards().toString().replaceAll(',', '')
+  renderFragment(cardString, bookContainer)
 }
 
-// Events
 
-bookContainer.addEventListener('click', (event) => {
+// Events
+const removeBookEvent = (event) => {
   const target = event.target
 
-  if (target.hasAttribute('delete')) {
-    removeBook(target.getAttribute('id'))
-    renderCards()
-  }
-})
+  removeBook(target.getAttribute('id'))
+  renderCards()
+}
+
+
 
 createBook('La Paradise', 'John Fuga', 90, true)
 createBook('In the River', 'Palsulo Trade', 900, false)
 createBook('El Sable', 'Saruman Kanino', 120, false)
+
 
 renderCards()
 
