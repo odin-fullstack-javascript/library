@@ -55,7 +55,8 @@ const createBookCards = () => {
       <div class="book-card">
         <h1 class="book-card--title">${book.title}</h1>
         <p class="book-card--author">${book.author}</p>
-        <p class="book-car--pages">${book.pages}</p>
+        <p class="book-card--pages">${book.pages}</p>
+        <p class="book-card--read">${book.read ? 'Read' : 'Not readed yet'}</p>
         <button id="${id}" delete onclick="removeBookEvent(event)">delete</button>
       </div>
     `
@@ -91,7 +92,8 @@ const onSubmitForm = (event) => {
   createBook(
     formElements.title.value, 
     formElements.author.value, 
-    formElements.pages.value
+    formElements.pages.value,
+    formElements.read.checked
   )
 
   renderCards()
