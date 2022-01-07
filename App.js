@@ -2,6 +2,9 @@
 
 const appContainer = document.getElementById('App')
 const bookContainer = appContainer.querySelector('.book-container')
+const formContainer = appContainer.querySelector('.form-container')
+
+const addBookButton = appContainer.querySelector('.add-book')
 
 
 let myLibrary = []
@@ -15,6 +18,8 @@ function Book(title, author, pages, read) {
 
 // FUNCTIONS
 
+// this function appends a fragment in the DOM,
+// this replace innerHTML
 function renderFragment(htmlString, containerElement) {
   const fragment = document.createDocumentFragment()
   const parser = new DOMParser()
@@ -24,6 +29,7 @@ function renderFragment(htmlString, containerElement) {
   elements.forEach(element => {
     fragment.appendChild(element)
   })
+  containerElement.innerHTML = ''
   containerElement.append(fragment)
 }
 
@@ -69,6 +75,46 @@ const removeBookEvent = (event) => {
 
   removeBook(target.getAttribute('id'))
   renderCards()
+}
+
+// The add book button opens the modal with the form
+addBookButton.addEventListener('click', () => {
+  showModal()
+  console.log('book added')  
+})
+
+// Submit handler for creating a new book
+const onSubmitForm = (event) => {
+  event.preventDefault()
+  const formElements = event.srcElement.elements
+
+  createBook(
+    formElements.title.value, 
+    formElements.author.value, 
+    formElements.pages.value
+  )
+
+  renderCards()
+  closeModal()
+}
+
+// form modal event handler
+formContainer.addEventListener('click', (event) => {
+  const target = event.target
+  if(target.hasAttribute('modal') || 
+     target.hasAttribute('close')) {
+    closeModal()
+  }
+})
+
+// MODAL CLOSE AND SHOW FUNCTIONS
+
+const showModal = () => {
+  formContainer.style.display = 'grid'
+}
+
+const closeModal = () => {
+  formContainer.style.display = 'none'
 }
 
 
