@@ -15,10 +15,14 @@
 <body>
   <main id="App">
 
-    <h1>The Library</h1>
-    <a href="">Christian Velasco</a>
+    <header class="header">
+      <div class="header-titles">
+        <h1>The Library</h1>
+        <a href="">Christian Velasco</a>
+      </div>
+      <button class="add-book">Add Book</button>
+    </header>
 
-    <button class="add-book">Add Book</button>
 
     <section class="book-container">
     </section>
@@ -40,6 +44,10 @@
         <div class="form-field">
           <label for="pages">Pages</label>
           <input id="pages" type="number" min="0">
+        </div>
+        <div class="form-field checkbox">
+          <label for="read">Read</label>
+          <input type="checkbox" name="read" id="read">
         </div>
         <button class="form-submit">Submit</button>
       </form>

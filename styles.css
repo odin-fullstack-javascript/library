@@ -136,12 +136,36 @@ table {
 
 /* MY STYLES */
 
+html {
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
+body {
+  height: 100%;
+}
+
 h1 {
   font-size: 2rem;
 }
 
+main {
+  display: grid;
+  grid-template-rows: 0.2fr 1fr;
+  height: inherit;
+}
+
+.header {
+  display: grid;
+  gap: 1rem;
+  padding: 1rem;
+  justify-items: start;
+}
+
+
 .book-container {
   display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 1rem;
   padding: 1rem;
 }
@@ -184,6 +208,13 @@ h1 {
   padding: 0.2rem 0.5rem;
   border: 2px solid rgb(158, 158, 158);
   border-radius: 4px;
+}
+
+.form-field.checkbox {
+  place-items: center;
+  grid-auto-flow: column;
+  justify-content: start;
+  gap: 1rem;
 }
 
 .closeFormButton {
