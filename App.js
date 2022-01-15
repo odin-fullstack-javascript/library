@@ -54,10 +54,10 @@ const createBookCards = () => {
     /* html */`
       <div class="book-card">
         <h1 class="book-card--title">${book.title}</h1>
-        <p class="book-card--author">${book.author}</p>
-        <p class="book-card--pages">${book.pages}</p>
-        <p class="book-card--read">${book.read ? 'Read' : 'Not readed yet'}</p>
-        <button id="${id}" delete onclick="removeBookEvent(event)">delete</button>
+        <p class="book-card--author"><strong>Author:</strong> ${book.author}</p>
+        <p class="book-card--pages"> <strong>Pages:</strong>  ${book.pages}</p>
+        <p class="book-card--read" read="${book.read}">${book.read ? 'Read' : 'Not readed yet'}</p>
+        <button id="${id}" delete onclick="removeBookEvent(event)"> <i class="fas fa-trash"></i> delete</button>
       </div>
     `
   ))
@@ -65,7 +65,7 @@ const createBookCards = () => {
 
 
 const renderCards = () => {
-  const cardString = createBookCards().toString().replaceAll(',', '')
+  const cardString = createBookCards().join()
   renderFragment(cardString, bookContainer)
 }
 
@@ -121,9 +121,15 @@ const closeModal = () => {
 
 
 
-createBook('La Paradise', 'John Fuga', 90, true)
-createBook('In the River', 'Palsulo Trade', 900, false)
+createBook('The last guardian', 'Ashi Blade', 90, true)
+createBook('In the River', 'Sofos Trade', 900, false)
 createBook('El Sable', 'Saruman Kanino', 120, false)
+
+
+
+
+
+
 
 
 renderCards()
